@@ -12,11 +12,24 @@ public class Widget {
     private Long id;
     private String name;
     private String description;
+    private Integer version = 0;
 
     public Widget() {
     }
 
     public Widget(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Widget(String name, String description, Integer version) {
+        this.name = name;
+        this.description = description;
+        this.version = version;
+    }
+
+    public Widget(Long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
@@ -43,5 +56,23 @@ public class Widget {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "Widget{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", version=" + version +
+                '}';
     }
 }

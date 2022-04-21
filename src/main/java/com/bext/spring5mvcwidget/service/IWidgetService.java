@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface IWidgetService {
     public Optional<Widget> findById(Long id);
     public Iterable<Widget> findAll();
-    public void save(Widget widget);
+    public Widget save(Widget widget);
     public void deleteById( Long id);
 }

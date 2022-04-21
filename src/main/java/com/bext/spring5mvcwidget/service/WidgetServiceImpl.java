@@ -21,8 +21,9 @@ public class WidgetServiceImpl implements IWidgetService {
         return widgetRepository.findAll();
     }
 
-    public void save(Widget widget){
-        widgetRepository.save(widget);
+    public Widget save(Widget widget){
+        widget.setVersion( widget.getVersion() + 1);
+        return widgetRepository.save(widget);
     }
 
     public void deleteById( Long id){
