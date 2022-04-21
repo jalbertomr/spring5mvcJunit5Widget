@@ -1,6 +1,6 @@
 ## Spring Framework 5, Spring MVC, H2, Thymeleaf, JUnit5 Tests
 Simple CRUD application with thymeleaf frontend for simple
-entity
+entity with test Junit5
 
 EndPoints for REST (@RestController) , and thymeleaf frontend (@Controller)
 
