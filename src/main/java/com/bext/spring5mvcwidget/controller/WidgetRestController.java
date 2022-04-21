@@ -75,14 +75,14 @@ public class WidgetRestController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Header IF-MATCH");
         }
         // update the widget
-        widget.setId(id);
+        widget.setVersion(widgetFound.get().getVersion());
         Widget saveWidget = widgetService.save(widget);
         // return widget ok or error
         try {
             return ResponseEntity.ok()
                     .eTag( Integer.toString(widget.getVersion()))
                     .location(new URI("/rest/widget/" + widget.getId()))
-                    .body( widget);
+                    .body( saveWidget);
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

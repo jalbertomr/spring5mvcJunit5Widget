@@ -34,6 +34,13 @@ public class Widget {
         this.description = description;
     }
 
+    public Widget(Long id, String name, String description, Integer version) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.version = version;
+    }
+
     public Long getId() {
         return id;
     }
