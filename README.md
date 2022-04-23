@@ -1,6 +1,6 @@
-## Spring Framework 5, Spring MVC, H2, Thymeleaf, JUnit5 Tests
+## Spring Framework 5, Spring MVC, H2, Thymeleaf, JUnit5 Tests, DBUnit
 Simple CRUD application with thymeleaf frontend for simple
-entity with test Junit5
+entity with test Junit5, and DBUnit
 
 EndPoints for REST (@RestController) , and thymeleaf frontend (@Controller)
 
@@ -76,3 +76,95 @@ EndPoints for REST (@RestController) , and thymeleaf frontend (@Controller)
               .andExpect(jsonPath("$.name", is("name1")))
               .andExpect(jsonPath("$.description", is("Description1")))
               .andExpect(jsonPath("$.version", is(1)));
+
+#### DBUnit Test
+
+Add the respective dependencies
+
+     <!-- DBUnit -->
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-core</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-junit5</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        
+###### Setup de Database connection
+
+To set up de dataSource is used a class for configuration with the profile test
+
+    @Configuration
+    @Profile("test")
+    public class WidgetRepositoryTestConfiguration {
+
+      public DataSource dataSource(){
+          DriverManagerDataSource dataSource = new DriverManagerDataSource();
+          dataSource.setDriverClassName("org.h2.driver");
+          dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+          dataSource.setUsername("sa");
+          dataSource.setPassword("");
+          return dataSource;
+      }
+    }
+
+ When Run the test the profile mush be set in the environment variables
+        
+    spring.profile.active=test
+    
+ ###### The test for the Widget Repository
+ 
+  To test the WidgetRepository, the class under test is annotated and in this case is activated over the profile
+  test.
+ 
+    @ExtendWith(DBUnitExtension.class)
+    @SpringBootTest
+    @ActiveProfiles("test")
+    class WidgetRepositoryTest {
+ 
+     @Autowired
+     private DataSource dataSource;
+ 
+     @Autowired
+     private WidgetRepository widgetRepository;
+ 
+     public ConnectionHolder getConnectionHolder(){
+         return () -> dataSource.getConnection();
+     }
+ 
+     @Test
+     @DataSet("widgets.yml")
+     void findAll(){
+         ArrayList<Widget> widgets = Lists.newArrayList(widgetRepository.findAll());
+         Assertions.assertEquals(2, widgets.size(),"Widgets size should be 2");
+     }
+     
+     ...   
+     
+###### Init the data of the table for DBUnit
+
+The data of the table on database is inserted using a yml file. and specified on the functions to test
+
+    widget:
+    - id : 1
+      name : "Widget 1"
+      description : "Description Widget 1"
+      version : 1
+    - id : 2
+      name : "Widget 2"
+      description : "Description Widget 2"
+      version : 4     
