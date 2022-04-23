@@ -30,10 +30,6 @@ class WidgetRepositoryTest {
     @Autowired
     private WidgetRepository widgetRepository;
 
-    public ConnectionHolder getConnectionHolder(){
-        return () -> dataSource.getConnection();
-    }
-
     @Test
     @DataSet("widgets.yml")
     void findAll(){
