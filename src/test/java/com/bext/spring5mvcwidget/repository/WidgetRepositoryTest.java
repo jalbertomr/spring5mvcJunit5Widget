@@ -1,11 +1,9 @@
 package com.bext.spring5mvcwidget.repository;
 
 import com.bext.spring5mvcwidget.model.Widget;
-import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.DBUnitExtension;
 import org.assertj.core.util.Lists;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

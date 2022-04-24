@@ -56,7 +56,7 @@ public class WidgetController {
     @PostMapping("/widget/{id}")
     public String updateWidget(Widget widget){
         iWidgetService.save(widget);
-        return "redirect:/widget/";
+        return "redirect:/widget/" + widget.getId();
     }
 
     /* delete a widget by id */
