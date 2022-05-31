@@ -22,8 +22,10 @@ import java.util.Optional;
 @ActiveProfiles("test")
 class WidgetRepositoryTest {
 
+/*
     @Autowired
     private DataSource dataSource;
+*/
 
     @Autowired
     private WidgetRepository widgetRepository;

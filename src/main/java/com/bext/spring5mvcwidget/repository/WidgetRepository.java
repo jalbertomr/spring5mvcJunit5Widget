@@ -3,6 +3,7 @@ package com.bext.spring5mvcwidget.repository;
 import com.bext.spring5mvcwidget.model.Widget;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
