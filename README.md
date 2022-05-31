@@ -1,4 +1,11 @@
-## Spring Framework 5, Spring MVC, H2, Thymeleaf, JUnit5 Tests, DBUnit
+## Branch Person-Mapper-DTO-Repo-Test
+
+@Test with Junit5 with Person, PersonDto, MapStruct, Repository. The test create a Person, saves it, then convert 
+it to Dto, set some fields to null and modifies others, then the mapper updates Person from this Dto, But 
+uses MapStruct nullMappingStrategy.IGNORE to not copy the null fields to the Person. Then save it and recover it
+to check the all cycle and the null copy was ignored.  
+
+## Spring Framework 5, Spring MVC, H2, Thymeleaf, JUnit5 Tests, DBUnit. 
 Simple CRUD application with thymeleaf frontend for simple
 entity with test Junit5, and DBUnit
 
