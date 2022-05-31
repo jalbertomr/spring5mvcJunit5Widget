@@ -4,6 +4,13 @@ entity with test Junit5, and DBUnit
 
 EndPoints for REST (@RestController) , and thymeleaf frontend (@Controller)
 
+## [Branch Person-Mapper-DTO-Repo-Test](https://github.com/jalbertomr/spring5mvcJunit5Widget/tree/Person-Mapper-DTO-Repo-Test)
+
+@Test with Junit5 with Person, PersonDto, MapStruct, Repository. The test create a Person, saves it, then convert 
+it to Dto, set some fields to null and modifies others, then the mapper updates Person from this Dto, But 
+uses MapStruct nullMappingStrategy.IGNORE to not copy the null fields to the Person. Then save it and recover it
+to check the all cycle and the null copy was ignored.  
+
 #### Junit5 Test Service, Controller, RESTController level
 
 ##### Test on Service Level
